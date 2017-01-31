@@ -1,0 +1,29 @@
+#+ summary: Returns DIVE entity details, based on a entity id
+#+ endpoint: http://dbpedia.org/sparql/
+#+ idField: entity
+#+ tags:
+#+      - Dive-UI-DBPedia
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX : <http://dbpedia.org/resource/>
+PREFIX dbpedia2: <http://dbpedia.org/property/>
+PREFIX dbpedia: <http://dbpedia.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?entity ?label ?placeholder ?startDate ?source ?type
+WHERE {
+  ?_id_iri rdf:type <http://dbpedia.org/ontology/Person> .
+  ?_id_iri rdfs:label ?label .
+  FILTER (langMatches(lang(?label),"en"))
+  OPTIONAL { ?_id_iri foaf:depiction ?placeholder  }
+  OPTIONAL { ?_id_iri <http://dbpedia.org/ontology/birthDate> ?startDate }
+  OPTIONAL { ?_id_iri <http://dbpedia.org/ontology/birthPlace> ?source .
+             ?source rdf:type <http://dbpedia.org/ontology/Settlement> }
+  BIND( "person" as ?type )
+  BIND( ?_id_iri as ?entity)
+}
+LIMIT 1
