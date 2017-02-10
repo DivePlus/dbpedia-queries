@@ -2,8 +2,7 @@
 #+ endpoint: http://data.dive.beeldengeluid.nl/sparql/
 #+ idField: type
 #+ tags:
-#+      - Dive-UI
-
+#+      - Dive-UI-DBPedia
 SELECT ?type ?count ?title ?description WHERE {
   VALUES (?type ?count ?title ?description) {
    ( "event"        8123 "Events"       "An event")

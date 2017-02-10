@@ -14,7 +14,7 @@ PREFIX dbpedia2: <http://dbpedia.org/property/>
 PREFIX dbpedia: <http://dbpedia.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT ?entity ?label ?placeholder ?startDate ?source ?type
+SELECT ?entity ?label ?placeholder ?startDate ?source ?type ?relations
 WHERE {
   ?_id_iri rdf:type <http://dbpedia.org/ontology/Person> .
   ?_id_iri rdfs:label ?label .
@@ -23,7 +23,8 @@ WHERE {
   OPTIONAL { ?_id_iri <http://dbpedia.org/ontology/birthDate> ?startDate }
   OPTIONAL { ?_id_iri <http://dbpedia.org/ontology/birthPlace> ?source .
              ?source rdf:type <http://dbpedia.org/ontology/Settlement> }
-  BIND( "person" as ?type )
   BIND( ?_id_iri as ?entity)
+  BIND( "person" as ?type )
+  BIND("Matches query," as ?relations)
 }
 LIMIT 1

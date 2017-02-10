@@ -2,8 +2,7 @@
 #+ endpoint: http://data.dive.beeldengeluid.nl/sparql/
 #+ idField: suggestion
 #+ tags:
-#+      - Dive-UI
-
+#+      - Dive-UI-DBPedia
 SELECT ?suggestion WHERE {
   VALUES (?suggestion) {
    ("Marco Polo")

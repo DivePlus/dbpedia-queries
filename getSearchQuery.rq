@@ -15,8 +15,7 @@ PREFIX dbpedia2: <http://dbpedia.org/property/>
 PREFIX dbpedia: <http://dbpedia.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT DISTINCT ?entity ?type ?source ?placeholder ?label ?startDate ?dbpediaType
-
+SELECT DISTINCT ?entity ?type ?source ?placeholder ?label ?startDate ?dbpediaType ?relations
 WHERE {
   ?entity rdf:type <http://dbpedia.org/ontology/Person> .
   ?entity rdfs:label ?label .
@@ -27,5 +26,6 @@ WHERE {
   OPTIONAL { ?entity <http://dbpedia.org/ontology/birthPlace> ?source .
              ?source rdf:type <http://dbpedia.org/ontology/Settlement> }
   BIND( "person" as ?type )
+  BIND("Matches query," as ?relations)
 }
 LIMIT 50
